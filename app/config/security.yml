@@ -1,0 +1,30 @@
+# app/config/security.yml
+security:
+    encoders:
+        AppBundle\Entity\User:
+            algorithm:           sha512
+            encode_as_base64:    true
+            iterations:          10
+
+    providers:
+        user_provider:
+            id: user.provider
+
+    firewalls:
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
+
+        oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            security:   false
+            # Add your favorite authentication process here
+
+        api:
+            pattern:    ^/api
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  false # can be omitted as its default value
+
+    access_control:
+        - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }

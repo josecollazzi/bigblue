@@ -1,0 +1,7 @@
+---
+    php_ppa: php5-5.6
+    doc_root: /opt/bigblue/web
+    sys_packages: []
+    dist: precise
+    php_packages: ["php5-mysql","php5-xdebug","php5-intl","php5-curl"]
+    pecl_packages: []

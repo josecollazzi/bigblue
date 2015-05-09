@@ -1,0 +1,33 @@
+---
+- name: mysql | Install MySQL Packages
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+    - php5-mysql
+    - libapache2-mod-auth-mysql
+  notify: restart mysql
+
+- name: mysql | Create databases
+  mysql_db: name={{ mysql.database }} state=present
+
+- name: 'Copy Conf file with root password credentials'
+  sudo: yes
+  template: src=.my.cnf dest=/home/vagrant/.my.cnf owner=root group=root mode=0600
+  notify: restart mysql
+
+- name: Ensure mysql binds to internal interface
+  sudo: yes
+  template: src=my.cnf dest=/etc/mysql/conf.d/my.cnf owner=root group=root mode=0644
+  notify: restart mysql
+
+- name: 'Update Rest-Mysql Root Password'
+  mysql_user: name={{ mysql.user }} host={{ item }} password={{ mysql.password }} priv=*.*:ALL,GRANT login_unix_socket=/var/run/mysqld/mysqld.sock state=present
+  with_items:
+    - "%"
+  notify: restart mysql
+
+
+

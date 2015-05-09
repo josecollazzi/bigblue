@@ -1,0 +1,6 @@
+mysql:
+    root_password: password
+    user: admin
+    password: password
+    database: bigblue
+    driver: pdo_mysql
