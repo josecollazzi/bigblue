@@ -1,0 +1,71 @@
+# app/config/config.yml
+parameters:
+    database_host:     "%database.host%"
+    database_port:     ~
+    database_name:     "%database.name%"
+    database_user:     "%database.user%"
+    database_password: "%database.password%"
+    database_driver:   "%database.driver%"
+
+fos_oauth_server:
+    db_driver: orm       # Driver availables: orm, mongodb, or propel
+    client_class:        AppBundle\Entity\Client
+    access_token_class:  AppBundle\Entity\AccessToken
+    refresh_token_class: AppBundle\Entity\RefreshToken
+    auth_code_class:     AppBundle\Entity\AuthCode
+    service:
+        user_provider: bb.user.provider
+        options:
+            supported_scopes: user
+
+
+#hwi_oauth:
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    # firewall_name: secured_area
+
+    # an optional setting to configure a query string parameter which can be used to redirect
+    # the user after authentication, e.g. /connect/facebook?_destination=/my/destination will
+    # redirect the user to /my/destination after facebook authenticates them.  If this is not
+    # set then the user will be redirected to the original resource that they requested, or
+    # the base address if no resource was requested.  This is similar to the behaviour of
+    # [target_path_parameter for form login](http://symfony.com/doc/2.0/cookbook/security/form_login.html).
+    # target_path_parameter: _destination
+
+    # an optional setting to use the HTTP REFERER header to be used in case no
+    # previous URL was stored in the session (i.e. no resource was requested).
+    # This is similar to the behaviour of
+    # [using the referring URL for form login](http://symfony.com/doc/2.0/cookbook/security/form_login.html#using-the-referring-url).
+    # use_referer: true
+
+    # here you will add one (or more) configurations for resource owners
+    # and other settings you want to adjust in this bundle, just checkout the list below!
+
+jms_serializer:
+    metadata:
+        auto_detection: false
+        directories:
+            api_responses:
+                namespace_prefix: "AppBundle"
+                path: "@AppBundle/Resources/config/serializer"
+
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: false
+    routing_loader:
+        default_format: json
+    view:
+        view_response_listener: 'force'
+        formats:
+            xml: true
+            json : true
+        default_engine: none
+        templating_formats:
+            html: true
+    access_denied_listener:
+        json: true
+    allowed_methods_listener: true
+
+sensio_framework_extra:
+    view: { annotations: false }
+    router: { annotations: true }

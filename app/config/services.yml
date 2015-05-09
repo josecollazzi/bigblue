@@ -1,27 +1,57 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
-parameters:
-#    parameter_name: value
-
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    ## SERVICES ##
 
-    user.provider:
+    bb.user.provider:
         class: AppBundle\Provider\UserProvider
-        arguments: ["@repo.user"]
+        arguments:
+            - "@bb.repo.user"
 
-    #### DOCTRINE REPO ####
+    ## CONTROLLERS ##
 
-    repo.user:
+    bb.user.controller:
+        class: AppBundle\Controller\UserController
+        arguments:
+            - @bb.api.entity.extractor
+            - @bb.user.service
+            - @bb.entity.factory
+
+    bb.api.entity.extractor:
+        class: AppBundle\FormHelper\ApiEntityExtractor
+        arguments:
+            - @form.factory
+            - @request_stack
+
+    ## DOCTRINE REPO ##
+
+    bb.repo.user:
         class: Doctrine\ORM\EntityRepository
         factory_service: doctrine.orm.default_entity_manager
         factory_method: getRepository
         arguments: ['AppBundle\Entity\User']
 
-    validator.new_email:
+
+    ## FORMS AND VALIDATION ##
+
+    bb.validator.new_email:
         class: AppBundle\Validator\Constraints\NewEmailValidator
-        arguments: ["@repo.user"]
+        arguments:
+            - @bb.repo.user
         tags:
             - { name: validator.constraint_validator, alias: validator_email_new }
+
+    bb.form.type.user:
+        class: AppBundle\Form\UserType
+        tags:
+            - { name: form.type, alias: user }
+
+    ## FACTORY ##
+
+    bb.entity.factory:
+        class: AppBundle\Factory\EntityFactory
+
+    bb.user.service:
+        class: AppBundle\User\UserService
+        arguments:
+            - "@security.password_encoder"
+            - "@doctrine.orm.entity_manager"
+            - @bb.repo.user

@@ -1,6 +1,7 @@
 app:
     resource: @AppBundle/Controller/
     type:     annotation
+    defaults: {_format: json}
 
 # app/config/routing.yml
 fos_oauth_server_token:
@@ -16,3 +17,11 @@ appbundle_auth_login:
 appbundle_auth_login_check:
     pattern:  /oauth/v2/auth_login_check
     defaults: { _controller: AppBundle:Security:loginCheck }
+
+# hwi_oauth_redirect:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+#    prefix:   /connect
+#
+# hwi_oauth_login:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+#    prefix:   /login

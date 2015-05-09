@@ -36,12 +36,12 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        $user = $this->userRepository->findOneByUsername($username);
+        $user = $this->userRepository->findOneBy(['username' => $username]);
 
         if(!is_null($user)) {
             return $user;
         } else {
-            $message = sprintf('Unable to find an active admin AcmeDemoBundle:User object identified by "%s".', $username);
+            $message = sprintf('Unable to find an active admin AppBundle:User object identified by "%s".', $username);
 
             throw new UsernameNotFoundException($message, 0);
         }

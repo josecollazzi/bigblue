@@ -3,7 +3,7 @@
   sudo: true
   vars:
     web_server: apachephp
-    servername: auth.dev www.auth.dev 192.168.33.106
+    servername: auth.dev www.auth.dev 192.168.33.106 localhost bigblue
     localhost: 127.0.0.1
     timezone: UTC
   vars_files:
@@ -19,3 +19,4 @@
     - composer
     - phpcommon
     - app
+    - sqlite

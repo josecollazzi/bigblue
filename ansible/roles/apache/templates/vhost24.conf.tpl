@@ -4,6 +4,7 @@
     ServerAdmin webmaster@localhost
     DocumentRoot {{ doc_root }}
 
+    SetEnv          SYMFONY__DATABASE__DRIVER pdo_mysql
     SetEnv          SYMFONY__DATABASE__USER {{ mysql.user }}
     SetEnv          SYMFONY__DATABASE__PASSWORD {{ mysql.password }}
     SetEnv          SYMFONY__DATABASE__NAME {{ mysql.database }}

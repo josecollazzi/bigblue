@@ -1,0 +1,29 @@
+language: php
+
+php:
+    - 5.5
+
+sudo: false
+
+before_script:
+    - cp app/config/parameters_test.travis.yml app/config/parameters_test.yml
+    - cp app/config/parameters_test.travis.yml app/config/parameters.yml
+    - composer install --dev --no-interaction --prefer-source
+
+script:
+    - ./bin/phpspec run -fpretty --verbose
+    - composer self-update
+    - mysql -e 'create database bigblue;'
+    - phpunit -c app
+
+env:
+    - DB=mysql SYMFONY__DATABASE__DRIVER=pdo_mysql SYMFONY__DATABASE__USER=root SYMFONY__DATABASE__PASSWORD ="" SYMFONY__DATABASE__NAME=bigblue SYMFONY__DATABASE__HOST=localhost SYMFONY__DATABASE__DRIVER=pdo_mysql SYMFONY_ENV=test
+
+after_failure:
+    - "cat /home/travis/build/lordkote/bigblue/app/logs/test.log"
+
+test:
+  adapter: mysql2
+  database: bigblue
+  username: root
+  encoding: utf8

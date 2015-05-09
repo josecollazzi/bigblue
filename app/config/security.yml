@@ -8,7 +8,7 @@ security:
 
     providers:
         user_provider:
-            id: user.provider
+            id: bb.user.provider
 
     firewalls:
         oauth_token:

@@ -2,14 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class ClientController extends Controller
 {
     /**
-     * @Route("/app/example-client", name="homepage")
+     * @Rest\Get("/app/example-client", name="homepage")
      */
     public function indexAction()
     {
@@ -17,7 +17,7 @@ class ClientController extends Controller
     }
 
     /**
-     * @Route("/app/create", name="create-client")
+     * @Rest\Post("/app/client", name="create-client")
      */
     public function createAction()
     {
@@ -34,15 +34,6 @@ class ClientController extends Controller
             'redirect_uri'  => $urlRedirection,
             'response_type' => 'code'
         ];
-
-        /*
-        return $this->redirect($this->generateUrl('fos_oauth_server_authorize', array(
-                    'client_id'     => $client->getPublicId(),
-                    'redirect_uri'  => 'http://www.example.com',
-                    'response_type' => 'code'
-                )));
-        *
-        */
 
         $headers = array(
             'Content-Type' => 'application/json'

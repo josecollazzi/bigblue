@@ -7,6 +7,11 @@
               regexp='date.timezone ='
               line='date.timezone = {{ timezone }}'
 
+- name: ensure timezone is set in cli php.ini
+  lineinfile: dest=/etc/php5/cli/php.ini
+              regexp='date.timezone ='
+              line='date.timezone = {{ timezone }}'
+
 - name: 'Copy xdebug file'
   sudo: yes
   template: src=xdebug.tpl dest=/etc/php5/mods-available/xdebug.ini owner=root group=root mode=0600

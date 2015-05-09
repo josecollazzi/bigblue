@@ -16,13 +16,19 @@
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0.12",
-        "sensio/framework-extra-bundle": "~3.0",
+        "sensio/framework-extra-bundle": "^3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "friendsofsymfony/oauth-server-bundle": "dev-master"
+        "friendsofsymfony/oauth-server-bundle": "dev-master",
+        "hwi/oauth-bundle": "0.4.*@dev",
+        "friendsofsymfony/rest-bundle": "^1.5",
+        "jms/serializer-bundle": "^0.13.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "4.4.*"
+        "phpunit/phpunit": "4.4.*",
+        "phpspec/phpspec": "~2.0",
+        "liip/functional-test-bundle": "^1.2",
+        "doctrine/doctrine-fixtures-bundle": "^2.2"
     },
     "scripts": {
         "post-root-package-install": [

@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,10 +13,8 @@ class ApiController extends Controller
      */
     public function articlesAction()
     {
-        $articles = array('article1', 'article2', 'article3');
-        return new JsonResponse($articles);
+        return new JsonResponse(array('article1', 'article2', 'article3'));
     }
-
 
     public function userAction()
     {
@@ -29,7 +28,7 @@ class ApiController extends Controller
 
         return new JsonResponse(array(
                 'message' => 'User is not identified'
-            ));
-
+            )
+        );
     }
 }
