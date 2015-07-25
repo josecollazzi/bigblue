@@ -14,8 +14,8 @@ script:
     - mysql -e 'create database bigblue;'
     - phpunit -c app
 
-env:
-    - DB=mysql SYMFONY__DATABASE__DRIVER=pdo_mysql SYMFONY__DATABASE__USER=root SYMFONY__DATABASE__PASSWORD ="" SYMFONY__DATABASE__NAME=bigblue SYMFONY__DATABASE__HOST=localhost SYMFONY__DATABASE__DRIVER=pdo_mysql SYMFONY_ENV=travis
+#env:
+#    - DB=mysql SYMFONY__DATABASE__DRIVER=pdo_mysql
 
 after_failure:
     - "cat /home/travis/build/lordkote/bigblue/app/logs/test.log"
