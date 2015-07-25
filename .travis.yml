@@ -6,8 +6,6 @@ php:
 sudo: false
 
 before_script:
-    - cp app/config/parameters_test.travis.yml app/config/parameters_test.yml
-    - cp app/config/parameters_test.travis.yml app/config/parameters.yml
     - composer install --dev --no-interaction --prefer-source
 
 script:

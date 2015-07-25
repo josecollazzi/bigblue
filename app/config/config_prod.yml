@@ -24,3 +24,17 @@ monolog:
             level: debug
         console:
             type:  console
+
+# in production use the environment variables
+parameters:
+    #SYMFONY__DATABASE__HOST
+    database_host:     "%database.host%"
+    database_port:     ~
+    #SYMFONY__DATABASE__NAME
+    database_name:     "%database.name%"
+    #SYMFONY__DATABASE__USER
+    database_user:     "%database.user%"
+    #SYMFONY__DATABASE__PASSWORD
+    database_password: "%database.password%"
+    #SYMFONY__DATABASE__DRIVER
+    database_driver:   "%database.driver%"

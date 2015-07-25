@@ -1,12 +1,12 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
 
-    database_host:     "%database.host%"
+    database_host:     "127.0.0.1"
     database_port:     ~
-    database_name:     "%database.name%"
-    database_user:     "%database.user%"
-    database_password: "%database.password%"
-    database_driver:   "%database.driver%"
+    database_name:     "bigblue"
+    database_user:     "admin"
+    database_password: "password"
+    database_driver:   "pdo_mysql"
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
