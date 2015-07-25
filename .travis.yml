@@ -6,7 +6,7 @@ php:
 sudo: false
 
 before_script:
-    - composer install --dev --no-interaction --prefer-source
+    - composer install --travis --no-interaction --prefer-source
 
 script:
     - ./bin/phpspec run -fpretty --verbose
