@@ -7,9 +7,9 @@ sudo: false
 
 before_script:
     - composer self-update
+    - composer install --dev --no-interaction --prefer-source
 
 script:
-    - composer install --dev --no-interaction --prefer-source
     - ./bin/phpspec run -fpretty --verbose
     - mysql -e 'create database bigblue;'
     - phpunit -c app
