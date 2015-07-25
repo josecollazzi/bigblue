@@ -6,6 +6,7 @@ php:
 sudo: false
 
 before_script:
+    - cp app/config/parameters_test.travis.yml app/config/parameters.yml
     - composer install --dev --no-interaction --prefer-source
 
 script:
@@ -15,7 +16,7 @@ script:
     - phpunit -c app
 
 env:
-    - DB=mysql SYMFONY__DATABASE__DRIVER=pdo_mysql SYMFONY__DATABASE__USER=root SYMFONY__DATABASE__PASSWORD ="" SYMFONY__DATABASE__NAME=bigblue SYMFONY__DATABASE__HOST=localhost SYMFONY__DATABASE__DRIVER=pdo_mysql SYMFONY_ENV=test
+    - DB=mysql SYMFONY__DATABASE__DRIVER=pdo_mysql SYMFONY__DATABASE__USER=root SYMFONY__DATABASE__PASSWORD ="" SYMFONY__DATABASE__NAME=bigblue SYMFONY__DATABASE__HOST=localhost SYMFONY__DATABASE__DRIVER=pdo_mysql SYMFONY_ENV=travis
 
 after_failure:
     - "cat /home/travis/build/lordkote/bigblue/app/logs/test.log"
