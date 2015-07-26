@@ -15,6 +15,7 @@
     - php5-cli
     - apache
     - php5
+    - env-variables-bigblue
     - mysql
     - composer
     - phpcommon

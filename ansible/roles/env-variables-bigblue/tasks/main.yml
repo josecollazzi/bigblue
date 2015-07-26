@@ -1,0 +1,7 @@
+- name: Load environment variables
+  sudo: yes
+  template: src=big-blue-env-variables.sh.tpl dest=/etc/profile.d/bigblue-env-variables.sh
+
+- name: source bigblue-env-variables.sh
+  sudo: yes
+  shell: . /etc/profile.d/bigblue-env-variables.sh
