@@ -27,3 +27,8 @@
   template: src=vhost22.conf.tpl dest=/etc/apache2/sites-available/default
   notify: restart apache
   when: apache_version.stdout.find('Apache/2.2.') != -1
+
+- name: fix fully qualified domain name warning
+  sudo: yes
+  template: src=fqdn.conf.tpl dest=/etc/apache2/conf-enabled/fqdn.conf
+  notify: restart apache
