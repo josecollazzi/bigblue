@@ -10,6 +10,16 @@ fos_oauth_server:
         options:
             supported_scopes: user
 
+    authorize:
+        form:
+            type:               fos_oauth_server_authorize
+            handler:            fos_oauth_server.authorize.form.handler.default
+            name:               fos_oauth_server_authorize_form
+            validation_groups:
+                # Defaults:
+                - Authorize
+                - Default
+
 
 #hwi_oauth:
     # name of the firewall in which this bundle is active, this setting MUST be set

@@ -1,9 +1,3 @@
-zend_extension=xdebug.so
-xdebug.remote_enable = on
-xdebug.remote_connect_back = on
-xdebug.idekey = "PHPSTORM"
-xdebug.remote_port=9001
-
 [xdebug]
 zend_extension = xdebug.so
 xdebug.remote_enable = true
