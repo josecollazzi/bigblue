@@ -4,6 +4,7 @@
   vars:
     web_server: apachephp
     servername: auth.dev www.auth.dev 192.168.33.106 localhost bigblue
+    xdebug_servername: bigblue
     localhost: 127.0.0.1
     timezone: UTC
   vars_files:

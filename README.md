@@ -35,8 +35,8 @@ POST http://192.168.33.106/app/client
 Register a new user
 POST http://192.168.33.106/app/user
 
-Fetch a user
-GET http://192.168.33.106/app/user/id_of_the_user
+Fetch a user:
+GET http://192.168.33.106/app/user/{id_of_the_user}
 
 User login:
 GET http://192.168.33.106/app/login

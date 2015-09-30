@@ -30,5 +30,10 @@
 
 - name: fix fully qualified domain name warning
   sudo: yes
-  template: src=fqdn.conf.tpl dest=/etc/apache2/conf-enabled/fqdn.conf
+  template: src=servername.conf.tpl dest=/etc/apache2/conf-available/servername.conf
+  notify: restart apache
+
+- name: activate config for servername
+  sudo: yes
+  command: sudo a2enconf servername
   notify: restart apache

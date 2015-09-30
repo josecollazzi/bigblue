@@ -14,9 +14,4 @@
 
 - name: 'Copy xdebug file'
   sudo: yes
-  template: src=xdebug.tpl dest=/etc/php5/mods-available/xdebug.ini owner=root group=root mode=0600
-
-- name: 'Change permissions xdebug file'
-  sudo: yes
-  command: chmod ugo+r /etc/php5/mods-available/xdebug.ini
-  notify: restart apache
+  template: src=xdebug.tpl dest=/etc/php5/mods-available/xdebug.ini owner=root group=root mode=0775
