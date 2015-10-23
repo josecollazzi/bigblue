@@ -1,0 +1,9 @@
+#AppBundle\Entity\Client.yml
+AppBundle\Entity\Client:
+    exclusion_policy: ALL
+    properties:
+    virtual_properties:
+        getPublicId:
+            serialized_name: client_id
+        getSecret:
+            serialized_name: client_secret

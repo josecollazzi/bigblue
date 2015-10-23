@@ -8,6 +8,9 @@ use AppBundle\User\UserService;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\FormInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Class AccountController
@@ -17,9 +20,10 @@ use Symfony\Component\Form\FormInterface;
  */
 class UserController
 {
-    /**
-     * @var ApiEntityExtractor $apiEntityExtractor
-     */
+    /** @var TokenStorageInterface */
+    private $tokenStorage;
+
+    /** @var ApiEntityExtractor $apiEntityExtractor */
     private $apiEntityExtractor;
 
     /** @var  UserService */
@@ -29,15 +33,18 @@ class UserController
     private $entityFactory;
 
     /**
+     * @param TokenStorageInterface $tokenStorage
      * @param ApiEntityExtractor $apiEntityExtractor
      * @param UserService $userService
      * @param EntityFactory $entityFactory
      */
     public function __construct(
+        TokenStorageInterface $tokenStorage,
         ApiEntityExtractor $apiEntityExtractor,
         UserService $userService,
         EntityFactory $entityFactory
     ){
+        $this->tokenStorage = $tokenStorage;
         $this->apiEntityExtractor = $apiEntityExtractor;
         $this->userService = $userService;
         $this->entityFactory = $entityFactory;
@@ -67,15 +74,44 @@ class UserController
 
     /**
      *
-     * @Rest\Get("/app/user/{username}", name="fetch_user")
-     * @Rest\View(templateVar="user")
+     * @Rest\Get("/api/user/{userName}", name="fetch_user_token")
+     * @Rest\View(serializerGroups={"token"})
      *
-     * @param string $username
+     * @param string $userName
      * @return User
      */
-    public function getUserAction($username)
+    public function getUserAction($userName)
     {
-        $user = $this->userService->getUser($username);
+        return $this->userService->getUser($userName);
+    }
+
+    /**
+     *
+     * @Rest\Get("/api/user", name="fetch_my_user_token")
+     * @Rest\View(serializerGroups={"token"})
+     *
+     * @return User
+     */
+    public function getMyUserAction()
+    {
+        return $this->tokenStorage->getToken()->getUser();
+    }
+
+    /**
+     *
+     * @Rest\Get("/api/user/{userName}/profile", name="fetch_user_profile")
+     * @Rest\View
+     *
+     * @param string $userName
+     * @return User
+     */
+    public function getUserProfileAction($userName)
+    {
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        if ($user->getUsername()!==$userName) {
+            throw new BadRequestHttpException();
+        }
 
         return $user;
     }

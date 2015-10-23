@@ -55,10 +55,6 @@ class UserService
      */
     public function getUser($username)
     {
-        return $this->userRepository->findOneBy(
-            [
-                'username'=>$username
-            ]
-        );
+        return $this->userRepository->findOneBy(['username' => $username]);
     }
 } 

@@ -49,6 +49,9 @@ jms_serializer:
             api_responses:
                 namespace_prefix: "AppBundle"
                 path: "@AppBundle/Resources/config/serializer"
+            oauth_library:
+                namespace_prefix: "FOS"
+                path: "@AppBundle/Resources/config/serializer"
 
 fos_rest:
     param_fetcher_listener: true

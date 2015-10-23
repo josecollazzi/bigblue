@@ -23,7 +23,7 @@ class NewEmailValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        $userFound = $this->userRepository->findOneBy(['username' => $value]);
+        $userFound = $this->userRepository->findOneBy(['email' => $value]);
 
         if (!is_null($userFound)) {
             $this->context->buildViolation($constraint->message)

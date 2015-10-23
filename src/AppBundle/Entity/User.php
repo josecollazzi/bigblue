@@ -23,6 +23,10 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=25, unique=true)
+     */
+    private $username;
+
+    /**
      * @Assert\NotBlank()
      * @Assert\Email(
      *     message = "The username '{{ value }}' is not a valid email.",
@@ -30,10 +34,6 @@ class User implements UserInterface
      * )
      * @AppAssert\NewEmail()
      *
-     */
-    private $username;
-
-    /**
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $email;
@@ -62,6 +62,7 @@ class User implements UserInterface
 
     public function __construct()
     {
+        $this->username = uniqid();
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
     }
@@ -118,7 +119,7 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array('USER');
     }
 
     /**
@@ -128,4 +129,19 @@ class User implements UserInterface
     {
     }
 
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
 }

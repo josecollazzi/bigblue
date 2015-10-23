@@ -2,28 +2,27 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\AccessToken;
 use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
+class LoadAccessTokenData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
      */
     public function load(ObjectManager $manager)
     {
-        $userAdmin = new User();
-        $userAdmin->setUsername('admin');
-        $userAdmin->setEmail('admin@gmail.com');
-        $userAdmin->setSalt('abc');
-        $userAdmin->setPassword('test');
+        $userToken = new AccessToken();
+        $userToken->setClient($this->getReference('client'));
+        $userToken->setUser($this->getReference('user-admin'));
+        $userToken->setToken('testToken');
+        $userToken->setExpiresAt(time()+100000000);
 
-        $manager->persist($userAdmin);
+        $manager->persist($userToken);
         $manager->flush();
-
-        $this->addReference('user-admin', $userAdmin);
     }
 
     /**
@@ -33,6 +32,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 }

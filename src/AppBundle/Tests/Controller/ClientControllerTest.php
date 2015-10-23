@@ -2,36 +2,25 @@
 
 namespace AppBundle\Tests\Controller;
 
-use Liip\FunctionalTestBundle\Test\WebTestCase;
-use Doctrine\ORM\Tools\SchemaTool;
+use AppBundle\Tests\AppTestCase;
 
-class ClientControllerTest extends WebTestCase
+class ClientControllerTest extends AppTestCase
 {
-    public function setUp()
-    {
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        if (!isset($metadatas)) {
-            $metadatas = $em->getMetadataFactory()->getAllMetadata();
-        }
-        $schemaTool = new SchemaTool($em);
-        $schemaTool->dropDatabase();
-        if (!empty($metadatas)) {
-            $schemaTool->createSchema($metadatas);
-        }
-        $this->postFixtureSetup();
-    }
-
-
     public function testCreateClient()
     {
         $this->loadFixtures(array());
 
         $client = static::createClient();
+        $client->request('POST', '/app/client');
 
-        $crawler = $client->request('POST', '/app/client');
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $content = json_decode($client->getResponse()->getContent(), true);
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertNotEmpty($content['client_id']);
+        $this->assertNotEmpty($content['client_secret']);
+
+        // todo the serializer should not expose random_id
+        //$this->assertArrayNotHasKey('random_id', $content);
+
     }
-
-
 }

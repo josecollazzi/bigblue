@@ -38,7 +38,7 @@ class UserProvider implements UserProviderInterface
     {
         $user = $this->userRepository->findOneBy(['username' => $username]);
 
-        if(!is_null($user)) {
+        if (!is_null($user)) {
             return $user;
         } else {
             $message = sprintf('Unable to find an active admin AppBundle:User object identified by "%s".', $username);
