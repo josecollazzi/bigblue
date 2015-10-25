@@ -11,10 +11,9 @@ before_script:
 
 script:
     - ./bin/phpspec run -fpretty --verbose
-    - ./app/console cache:clear
-    - ./app/console doctrine:database:drop --force
     - mysql -e 'create database bigblue;'
-    - ./app/console doctrine:database:create
+    - ./app/console cache:clear
+    - ./app/console doctrine:schema:drop --force
     - ./app/console doctrine:schema:create
     - phpunit -c app
 
