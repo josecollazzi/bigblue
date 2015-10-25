@@ -55,7 +55,7 @@ Vagrant.configure("2") do |config|4
     end
 
     config.vm.synced_folder "./", "/opt/bigblue", id: "vagrant-root",
-    owner: "vagrant",
+    owner: "www-data",
     group: "www-data",
     mount_options: ["dmode=777,fmode=777"]
     
