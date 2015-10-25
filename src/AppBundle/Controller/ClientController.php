@@ -36,6 +36,8 @@ class ClientController
         $client->setAllowedGrantTypes(['token', 'password', 'authorization_code', 'client_credentials']);
         $this->clientManager->updateClient($client);
 
+        var_dump($client);
+
         return $client;
     }
 }
