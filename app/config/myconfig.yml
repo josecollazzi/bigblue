@@ -44,13 +44,10 @@ fos_oauth_server:
 
 jms_serializer:
     metadata:
-        auto_detection: false
+        auto_detection: true
         directories:
             api_responses:
                 namespace_prefix: "AppBundle"
-                path: "@AppBundle/Resources/config/serializer"
-            oauth_library:
-                namespace_prefix: "FOS"
                 path: "@AppBundle/Resources/config/serializer"
 
 fos_rest:
