@@ -50,6 +50,8 @@ class UserControllerTest extends AppTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         $response = json_decode($client->getResponse()->getContent(), true);
 
+        var_dump($response);
+
         $this->assertSame('admin', $response['username']);
     }
 }

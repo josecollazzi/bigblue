@@ -18,6 +18,7 @@ class ClientControllerTest extends AppTestCase
 
         $this->assertNotEmpty($content['client_id']);
         $this->assertNotEmpty($content['client_secret']);
+        var_dump($content);
 
         // todo the serializer should not expose random_id
         //$this->assertArrayNotHasKey('random_id', $content);
