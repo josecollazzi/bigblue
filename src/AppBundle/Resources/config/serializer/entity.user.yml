@@ -1,12 +1,11 @@
 #AppBundle\Entity\User.yml
 AppBundle\Entity\User:
-    exclusion_policy: all
+    exclusion_policy: ALL
     properties:
         id:
             expose: true
         username:
             expose: true
-            groups: [token]
         email:
             expose: true
     virtual_properties:
