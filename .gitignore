@@ -10,4 +10,5 @@
 /vendor/
 .vagrant
 /bin/
+.idea
 /composer.phar
